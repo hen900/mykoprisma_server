@@ -92,6 +92,10 @@ manualOverrideSchema = {
 
 - **GET `/getOverride`**: Retrieves the current override data from the database.
 
+### Photo Model
+
+Photos are stored in an output directory /uploads with a timestamp.
+
 ### Photo Controller
 
 - **POST `/setPhoto`**: Sets the photo capture override. To manually trigger a photo capture, send a POST request to `/setPhoto` with the following JSON payload:
