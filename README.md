@@ -106,7 +106,7 @@ Photos are stored in an output directory /uploads with a timestamp.
   }
   ```
 
-  Setting `photoOverride` to 1 will trigger a photo capture, while setting it to 0 will disable the manual photo capture.
+  Setting `photoOverride` to 1 will trigger a photo capture every measurement cycle, while setting it to 0 will set it an upload at a predefined interval.
 
 ### Preset Model
 
