@@ -134,7 +134,7 @@ To test the API using https://reqbin.com/, follow these steps:
 
 2. Set the HTTP method (GET or POST) based on the endpoint you want to test.
 
-3. Enter the API URL in the following format: `http://localhost:3603/endpoint`, where `/endpoint` is the desired endpoint (e.g., `/setMeas`, `/getMeas`, `/setOverride`, `/getOverride`, `/setPhoto`, `/setPreset`, `/getPreset`).
+3. Enter the API URL in the following format: `http://mykoprisma.com:3603/endpoint`, where `/endpoint` is the desired endpoint (e.g., `/setMeas`, `/getMeas`, `/setOverride`, `/getOverride`, `/setPhoto`, `/setPreset`, `/getPreset`).
 
 4. If sending a POST request, select the "Body" tab and enter the JSON payload in the provided text area.
 
