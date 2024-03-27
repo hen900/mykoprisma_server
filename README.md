@@ -22,7 +22,7 @@ The following routes are defined in the API:
 ### Measurement Model
 
 A measurement is posted using the `/setMeas` endpoint. In this exchange, humidity, CO2, temperature, actuator status, and other relevant data are sent in JSON format. After receiving the measurement data, the server responds with the current preset and override data merged together.
-
+*The HIGH or LOW logic status of each actuator's control pin is also as a measurement.
 The measurement data is stored in a locally hosted MongoDB server using the following schema:
 
 ```javascript
