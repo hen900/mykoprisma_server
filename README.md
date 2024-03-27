@@ -1,7 +1,5 @@
-Here's the updated API documentation with the route names included:
 
-# API Documentation
-
+# Mykoprisma Node.js Server
 This API documentation provides an overview of the endpoints and functionality of the mykoprisma server designed to interact with an ESP32 device in a mushroom monitoring and control system. The API allows for the exchange of measurement data, manual control of actuators, and setting of preset conditions.
 The server application is built using Node.js and Express.js, and it uses MongoDB as the database for storing measurement data, override settings, and preset conditions. The API endpoints are designed to be accessed by the ESP32 device.
 
