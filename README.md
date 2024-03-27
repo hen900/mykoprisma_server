@@ -1,14 +1,27 @@
+Here's the updated API documentation with the route names included:
+
 # API Documentation
 
-This API documentation provides an overview of the endpoints and functionality of  the mykoprisma server designed to interact with an ESP32 device in a mushroom monitoring and control system. The API allows for the exchange of measurement data, manual control of actuators, and setting of preset conditions.
-The server application is built using Node.js and Express.js, and it uses MongoDB as the database for storing measurement data, override settings, and preset conditions. The API endpoints are designed to be accessed by the ESP32 device .
+This API documentation provides an overview of the endpoints and functionality of the mykoprisma server designed to interact with an ESP32 device in a mushroom monitoring and control system. The API allows for the exchange of measurement data, manual control of actuators, and setting of preset conditions.
+The server application is built using Node.js and Express.js, and it uses MongoDB as the database for storing measurement data, override settings, and preset conditions. The API endpoints are designed to be accessed by the ESP32 device.
 
+## Routes
+
+The following routes are defined in the API:
+
+- **POST `/setMeas`**: Uploads a new set of measurements and returns the current preset and override values merged together.
+- **POST `/setOverride`**: Manually sets the status of the actuators.
+- **POST `/setPhoto`**: Sets the photo capture override.
+- **POST `/setPreset`**: Sets the new preset data in the database.
+- **GET `/getPreset`**: Retrieves the current preset data from the database.
+- **GET `/getMeas`**: Retrieves measurement data from the database based on specified query parameters.
+- **GET `/getOverride`**: Retrieves the current override data from the database.
 
 ## Models
 
 ### Measurement Model
 
-A measurement is posted using the `/meas` endpoint. In this exchange, humidity, CO2, temperature, actuator status, and other relevant data are sent in JSON format. After receiving the measurement data, the server responds with commands specifying the desired status of each actuator based on the locally stored file `outbox.json`. In most cases, there is no ordered change in actuator status, so the status of each actuator matches the set value.
+A measurement is posted using the `/setMeas` endpoint. In this exchange, humidity, CO2, temperature, actuator status, and other relevant data are sent in JSON format. After receiving the measurement data, the server responds with the current preset and override data merged together.
 
 The measurement data is stored in a locally hosted MongoDB server using the following schema:
 
@@ -30,13 +43,30 @@ measSchema = {
 
 ### Measurement Controller
 
-- **POST `/setMeas`**: Uploads a new set of measurements and returns the current preset values and overrides. The ESP exchanges its own measurements for commands from the server with this POST request.
+- **POST `/setMeas`**: Uploads a new set of measurements and returns the current preset and override values merged together. The ESP exchanges its own measurements for commands from the server with this POST request. The response will have the following structure:
 
-- **GET `/getMeas`**: Returns raw measurement JSON data from the database.
+  ```json
+  {
+    "humidity": 60,
+    "co2": 800,
+    "temperature": 25,
+    "actuator0Override": 2,
+    "actuator1Override": 2,
+    "actuator2Override": 2,
+    "actuator3Override": 2,
+    "actuator4Override": 1,
+    "actuator5Override": 2,
+    "photoOverride": 2
+  }
+  ```
+
+  In this response, the preset values for humidity, CO2, and temperature are returned along with the override values for each actuator. The override values of 2 indicate that the preset should be used for those actuators, while the override value of 1 for actuator4 indicates that it has been manually set.
+
+- **GET `/getMeas`**: Retrieves measurement data from the database based on specified query parameters, such as `from`, `to`, `limit`, and `page`.
 
 ### Override Model
 
-An override is used to manually set the status of an actuator or to manually take pictures. It is a simple POST request wherein the locally stored set values are sent to the MongoDB server. The next time a measurement is posted, the server will respond with the updated statuses set by the `/override` endpoint.
+An override is used to manually set the status of an actuator or to manually take pictures. It is a simple POST request wherein the locally stored set values are sent to the MongoDB server. The next time a measurement is posted, the server will respond with the updated override statuses.
 
 The override data is stored using the following schema:
 
@@ -54,7 +84,7 @@ manualOverrideSchema = {
 
 ### Override Controller
 
-- **POST `/setOverride`**: Manually set the status of the actuators. They can be set individually or all together. For example, to manually turn on actuator 4, send a POST request to `/setOverride` with the following JSON payload:
+- **POST `/setOverride`**: Manually sets the status of the actuators. They can be set individually or all together. For example, to manually turn on actuator 4, send a POST request to `/setOverride` with the following JSON payload:
 
   ```json
   {
@@ -62,28 +92,23 @@ manualOverrideSchema = {
   }
   ```
 
-  Now, when the ESP polls the server and gets its commands with `/getMeas`, the response will be:
+- **GET `/getOverride`**: Retrieves the current override data from the database.
+
+### Photo Controller
+
+- **POST `/setPhoto`**: Sets the photo capture override. To manually trigger a photo capture, send a POST request to `/setPhoto` with the following JSON payload:
 
   ```json
   {
-    "humidity": 100,
-    "co2": 100,
-    "temperature": 100,
-    "actuator1Override": 2,
-    "actuator0Override": 2,
-    "actuator2Override": 2,
-    "actuator3Override": 2,
-    "actuator4Override": 1,
-    "actuator5Override": 2,
-    "photoOverride": 2
+    "photoOverride": 1
   }
   ```
 
-  In this response, all the overrides set to 2 will be ignored, while actuator4Override has been individually set by the earlier POST request.
+  Setting `photoOverride` to 1 will trigger a photo capture, while setting it to 0 will disable the manual photo capture.
 
 ### Preset Model
 
-A preset is a set of defined conditions including humidity, CO2 levels, and temperature. Once a preset is set, it is stored in a data buffer which is accessed by the ESP32. The ESP gets the values and makes decisions based on the preset unless an override is set. The preset GET response is also accompanied by the values of the buffer from the override function. When an actuator's override value is set to '2', it is ignored by the ESP, and the preset is used. If the override value for any of the actuators is set to either 1 or 0, the ESP will manually set the value of that actuator regardless of the preset values.
+A preset is a set of defined conditions including humidity, CO2 levels, and temperature. Once a preset is set, it is stored in the database and accessed by the ESP32. The ESP gets the preset values and makes decisions based on them unless an override is set.
 
 The preset data is stored using the following schema:
 
@@ -97,9 +122,9 @@ presetSchema = {
 
 ### Preset Controller
 
-- **POST `/changePreset`**: Changes the preset. Humidity, CO2, and temperature should all be changed at the same time.
+- **POST `/setPreset`**: Sets the new preset data in the database. Humidity, CO2, and temperature should all be changed at the same time.
 
-- **GET `/getPreset`**: Returns the presets that are set and the override buffer.
+- **GET `/getPreset`**: Retrieves the current preset data from the database.
 
 ## Testing with ReqBin
 
@@ -109,7 +134,7 @@ To test the API using https://reqbin.com/, follow these steps:
 
 2. Set the HTTP method (GET or POST) based on the endpoint you want to test.
 
-3. Enter the API URL in the following format: `http://localhost:3603/endpoint`, where `/endpoint` is the desired endpoint (e.g., `/setMeas`, `/getMeas`, `/setOverride`, `/changePreset`, `/getPreset`).
+3. Enter the API URL in the following format: `http://localhost:3603/endpoint`, where `/endpoint` is the desired endpoint (e.g., `/setMeas`, `/getMeas`, `/setOverride`, `/getOverride`, `/setPhoto`, `/setPreset`, `/getPreset`).
 
 4. If sending a POST request, select the "Body" tab and enter the JSON payload in the provided text area.
 

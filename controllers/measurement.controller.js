@@ -1,18 +1,26 @@
 const MeasModel = require('../models/measurement.model.js');
 const PresetModel = require('../models/preset.model.js');
+const OverrideModel = require('../models/override.model.js');
 
 exports.set = (req, res) => {
   MeasModel.newMeas(req.body)
     .then((result) => {
-      // Retrieve the current preset data (which includes override data)
-      return PresetModel.get();
+      // Retrieve the current preset and override data separately
+      return Promise.all([
+        PresetModel.get(),
+        OverrideModel.get()
+      ]);
     })
-    .then((preset) => {
-      if (preset) {
+    .then(([preset, override]) => {
+      if (preset && override) {
+        const response = {
+          ...preset,
+          ...override
+        };
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(preset, null, 3));
+        res.end(JSON.stringify(response, null, 3));
       } else {
-        res.status(404).send('Preset data not found');
+        res.status(404).send('Preset or override data not found');
       }
     })
     .catch((error) => {
@@ -44,7 +52,7 @@ exports.get = (req, res) => {
     query.timestamp = { $lte: new Date(to) };
   }
 
-  MeasModel.list(query, limit, page)
+  MeasModel.get(query, limit, page)
     .then((result) => {
       res.status(200).send(result);
     })
