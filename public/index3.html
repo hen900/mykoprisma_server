@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Measurement Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      background-color: #007acc;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .chart {
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin-top: 20px;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    button {
+      background-color: #007acc;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px;
+      padding: 10px 20px;
+    }
+
+    button:hover {
+      background-color: #005b8e;
+    }
+
+    .chart-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .chart-container canvas {
+      width: 45%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Measurement Dashboard</h1>
+
+  <div class="container">
+    <div class="chart">
+      <h2>Temperature</h2>
+      <canvas id="temperatureChart"></canvas>
+    </div>
+    
+    <div class="chart">
+      <h2>Humidity</h2>
+      <canvas id="humidityChart"></canvas>
+    </div>
+    
+    <div class="chart">
+      <h2>CO2</h2>
+      <canvas id="co2Chart"></canvas>
+    </div>
+
+    <div style="margin: 20px;">
+      <h2>Actuator Status</h2>
+      <p>Actuator 1: <span id="actuator1Status"></span></p>
+      <button id="actuator1On">On</button>
+      <button id="actuator1Off">Off</button>
+      <p>Actuator 2: <span id="actuator2Status"></span></p>
+      <button id="actuator2On">On</button>
+      <button id="actuator2Off">Off</button>
+      <p>Actuator 3: <span id="actuator3Status"></span></p>
+      <button id="actuator3On">On</button>
+      <button id="actuator3Off">Off</button>
+    </div>
+  </div>
+
+  <script src="dataproc.js"></script>
+</body>
+
+</html>

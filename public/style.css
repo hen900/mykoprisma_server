@@ -1,0 +1,497 @@
+/*Desktop dimensions*/
+@media only screen and (min-height: 900px){
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-image: linear-gradient(to right, #b05ee0 , #0130ad);
+    background-color: #94B9FF;
+    /*overflow: hidden;*/
+  }
+
+  main {
+    margin-left: 453px;
+  }
+
+  /*Measurement Data - Overview*/
+  #title-div {
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 789px;
+    display: flex;
+    margin-bottom: 21px;
+  }
+
+  #title-div h1 {
+    font-size: 36px;
+  }
+
+  #navbar {
+    background-color: white;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 421px;
+    height: 100%;
+  }
+
+  /*MycoLogic text*/
+  #navbar h2 {
+    font-size: 54px;
+    margin-left: 27px;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 40px;
+    width: 367px;
+    height: 143px;
+    border-color: black;
+    border-width: 5px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  #navbar ul {
+    height: 88%;
+    padding-left: 0;
+  }
+
+  #navbar li {
+    color: black;
+    list-style: none;
+    margin-left: 30px;
+    font-size: 28px;
+    position: relative;
+    padding-bottom: 30px;
+    width: 367px;
+  }
+
+  #navbar a:hover {
+    background-color: #A4A4A4;
+    color: black;
+  }
+
+  #navbar a {
+    display: block;
+    border-radius: 5px;
+    width: 347px;
+    padding: 10px;
+    color: #4a4a4a;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 25px;
+  }
+
+  .measurement-container {
+    background-color: white;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 21px;
+  }
+
+  .measurement-container h3 {
+    font-size: 27px;
+    margin-top: 27px;
+    margin-bottom: 60px;
+    font-weight: lighter;
+  }
+
+  /*replace with span later*/
+  .measurement-container span {
+    font-size: 50px;
+  }
+
+  .measurement-container p {
+    margin-top: 70px;
+    font-size: 16px;
+  }
+
+  #temperature, #humidity, #co2 {
+    font-weight: bolder;
+  }
+
+  #temperature-measurement{
+    width: 619px;
+    height: 295px;
+    overflow: hidden;
+  }
+
+  .humidity-co2-measurement-grid{
+    display: grid;
+    grid-template-columns: auto auto;
+    max-width: 441px;
+  }
+
+  #humidity-measurement, #co2-measurement{
+    width: 295px;
+    height: 295px;
+  }
+
+  #humidity-measurement {
+    margin-right: 28px;
+  }
+
+  #camera-toggle-buttons-grid{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  #camera-container {
+    background-color: white;
+    border-radius: 5px;
+    width: 387px;
+    height: 396px;
+  }
+
+  /*delete after camera is implemented*/
+  #camera-container p {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+
+  #toggle-button-container{
+    background-color: white;
+    width: 200px;
+    height: 396px;
+    border-radius: 20px;
+    align-items: center;
+    text-align: center;
+  }
+
+  #toggle-button-container p{
+    margin-bottom: 27px;
+  }
+
+  /*toggle button creation*/
+  /*Source: https://www.w3schools.com/howto/howto_css_switch.asp*/
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 100px; /* Adjusted width */
+    height: 60px; /* Adjusted height */
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 52px; /* Adjusted height */
+    width: 52px; /* Adjusted width */
+    left: 4px; /* Adjusted position */
+    bottom: 4px; /* Adjusted position */
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #b05ee0;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #b05ee0;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(52px); /* Adjusted translation */
+    -ms-transform: translateX(52px);
+    transform: translateX(40px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 20px; /* Adjusted border-radius */
+  }
+  
+  .slider.round:before {
+    border-radius: 20px;
+  }
+
+  /*containers with line charts*/
+  .chart-grid {
+    background-color: white;
+    width: 789px;
+    height: 908px;
+    border-radius: 5px;
+  }
+
+  .chart-container {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .actuator-status-container {
+    text-align: center;
+    align-items: center;
+  }
+
+  #emptyspaceabovetempchart{
+    height: 1px;
+  }
+
+  button {
+    width: 70px;
+    height: 40px;
+    background-color: #CDFFD8;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+
+  .actuator-status-container span {
+    font-weight: bold;
+  }
+
+  #create-preset-title{
+    width: 942px;
+    height: 132px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 21px;
+    margin-top: 26px;
+  }
+
+  #create-preset-title h1 {
+    font-size: 36px;
+  }
+
+  #create-preset-body{
+    width: 942px;
+    height: 880px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 22px;
+  }
+}
+
+/*laptop dimensions*/
+@media only screen and (min-height: 500px) and (max-height: 900px){
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-image: linear-gradient(to right, #CDFFD8 , #94B9FF);
+    background-color: #94B9FF;
+    /*overflow: hidden;*/
+  }
+
+  main {
+    margin-left: 362px;
+  }
+
+  /*Measurement Data - Overview*/
+  #title-div {
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 631px;
+    display: flex;
+    margin-bottom: 17px;
+  }
+
+  #title-div h1 {
+    font-size: 28px;
+  }
+
+  #navbar {
+    background-color: white;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 337px;
+    height: 100%;
+  }
+
+  /*MycoLogic text*/
+  #navbar h2 {
+    font-size: 43px;
+    margin-left: 21px;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 32px;
+    width: 293px;
+    height: 114px;
+    border-color: black;
+    border-width: 5px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  #navbar ul {
+    height: 88%;
+    padding-left: 0;
+  }
+
+  #navbar li {
+    color: black;
+    list-style: none;
+    margin-left: 24px;
+    font-size: 22px;
+    position: relative;
+    padding-bottom: 24px;
+    width: 293px;
+  }
+
+  #navbar a:hover {
+    background-color: #A4A4A4;
+    color: black;
+  }
+
+  #navbar a {
+    display: block;
+    border-radius: 5px;
+    width: 277px;
+    padding: 10px;
+    color: #4a4a4a;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 20px;
+  }
+
+  .measurement-container {
+    background-color: white;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 19px;
+  }
+
+  .measurement-container h3 {
+    font-size: 22px;
+    margin-top: 22px;
+    margin-bottom: 48px;
+    font-weight: lighter;
+  }
+
+  /*replace with span later*/
+  .measurement-container span {
+    font-size: 40px;
+  }
+
+  .measurement-container p {
+    margin-top: 56px;
+    font-size: 13px;
+  }
+
+  #temperature, #humidity, #co2 {
+    font-weight: bolder;
+  }
+
+  #temperature-measurement{
+    width: 495px;
+    height: 236px;
+    overflow: hidden;
+  }
+
+  .humidity-co2-measurement-grid{
+    display: grid;
+    grid-template-columns: auto auto;
+    max-width: 353px;
+  }
+
+  #humidity-measurement, #co2-measurement{
+    width: 236px;
+    height: 236px;
+  }
+
+  #humidity-measurement {
+    margin-right: 22px;
+  }
+
+  #camera-container {
+    background-color: white;
+    border-radius: 5px;
+    width: 495px;
+    height: 317px;
+  }
+
+  #camera-container p {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+
+  .chart-grid {
+    background-color: white;
+    width: 631px;
+    height: 727px;
+    border-radius: 5px;
+  }
+
+  .chart-container {
+    margin-top: 12px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .actuator-status-container {
+    text-align: center;
+    align-items: center;
+  }
+
+  #emptyspaceabovetempchart{
+    height: 1px;
+  }
+
+  button {
+    width: 56px;
+    height: 32px;
+    background-color: #CDFFD8;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    font-size: 13px;
+    padding: 4px;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+
+  .actuator-status-container span {
+    font-weight: bold;
+  }
+}

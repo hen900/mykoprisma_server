@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>mykologic</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>      
+        <nav id="navbar">
+            <h2>mykologic</h2>
+            <ul>
+                <li><a class="nav-link" href="http://mykologic.com">Overview</a></li>
+                <li><a class="nav-link" href="http://mykologic.com/preset">Presets</a></li>
+            </ul>
+        </nav>
+
+        <main id="main-measurement">
+            <section class="main-section" id="Overview">
+                <div class="overview-grid">
+                    <div class= "measurement-grid">
+                        <div id="measurement-water-grid">
+                            <div class="temperature-humidity-co2-grid">
+                                <div class = "measurement-container" id="temperature-measurement">
+                                    <h3>TEMPERATURE</h3>
+                                    <span id = "temperature">68.39&degF / 20.22&degC</span>
+                                    <p id="desiredTemp">Not Set</p>
+                                </div>
+                                <div class="humidity-co2-measurement-grid">
+                                    <div class = "measurement-container" id="humidity-measurement">
+                                        <h3>HUMIDITY</h3>
+                                        <span id = "humidity">80%</span>
+                                        <p id="desiredHumid">Not Set</p>
+                                    </div>
+                                    <div class = "measurement-container" id="co2-measurement">
+                                        <h3>CO<sub>2</sub> LEVEL</h3>
+                                        <span id = "co2">432 ppm</span>
+                                        <p id="desiredCO2">Not Set</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="water-level-container">
+                                <h3>WATER LEVEL</h3>
+                                <p id="water-level-percentage">0%</p>
+                                <div class="water-level" id="level5"></div>
+                                <div class="water-level" id="level4"></div>
+                                <div class="water-level" id="level3"></div>
+                                <div class="water-level" id="level2"></div>
+                                <div class="water-level" id="level1"></div>
+                                <!--
+                                    Change color of levels based on level of water:
+                                    100% = 5/5
+                                    80-99% = 4/5
+                                    60-79% = 3/5
+                                    40-59% = 2/5
+                                    20-39% = 1/5
+                                    0-19% = 0/5
+                                    TBD later on...
+                                -->
+                                <script>
+                                    //to do later once i figure out what sensor is used
+                                </script>
+                            </div>
+                        </div>
+                        <div id="camera-toggle-buttons-grid">
+                            <div id = "camera-container">
+                                <img id="latest-image" src="latest.jpg" alt="Camera Image" width="427" height="320">
+                            </div>
+                            <div id="icon-toggle-container">
+                                <div id="icon-toggle-grid">
+                                    <div id="toggle-button-icons">
+                                        <img src="./icon-pngs/brightness.png" alt="brightness" id="brightness-icon">
+                                        <img src="./icon-pngs/drop.png" alt="humidity" id="humidity-icon">
+                                        <img src="./icon-pngs/fever.png" alt="temperature" id="temperature-icon">
+                                        <img src="./icon-pngs/fan.png" alt="fan" id="fan-icon">
+                                    </div>
+                                    <div id="toggle-button-container">
+                                        <label class="switch" id="actuator1">
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" id="actuator2">
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" id="actuator3">
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" id="actuator4">
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="title-and-chart-grid">
+                        <div id="title-div">
+                            <h1>OVERVIEW</h1>
+                        </div>
+                        <div id="mushroom-type-div">
+                            <h2 id="mushroom-type"></h2>
+                        </div>
+                        <div class = "chart-grid">
+                            <div class="actuator-status-container" id="light-status">
+                                <p>Actuator 1 (Light) Status: <span id = "actuator1Status"></span></p>
+                            </div>
+                            <div class= "chart-container">
+                                <canvas id="temperatureChart" height="160"></canvas>
+                            </div>
+                            <div class="actuator-status-container">
+                                <p>Actuator 2 (Heater) Status: <span id = "actuator2Status"></span></p>
+                            </div>
+                            <div class = "chart-container">
+                                <canvas id="humidityChart" height="160"></canvas>
+                            </div>
+                            <div class="actuator-status-container">
+                                <p>Actuator 3 (Atomizer) Status: <span id = "actuator3Status"></span></p>
+                            </div>
+                            <div class = "chart-container">
+                                <canvas id="co2Chart" height="160"></canvas>
+                            </div>
+                            <div class="actuator-status-container">
+                                <p>Actuator 4 (Fan) Status: <span id="actuator4Status"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script src ="./dataproc.js"></script> 
+        <script src ="./setpreset.js"></script> 
+    </body>
+</html>
