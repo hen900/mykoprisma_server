@@ -9,7 +9,7 @@ The following routes are defined in the API:
 
 - **POST `/setMeas`**: Uploads a new set of measurements and returns the current preset and override values merged together.
 - **POST `/setOverride`**: Manually sets the status of the actuators.
-- **POST `/setPhoto`**: Sets the photo capture override.
+- **POST `/setPhoto`**: Uploads a photo
 - **POST `/setPreset`**: Sets the new preset data in the database.
 - **GET `/getPreset`**: Retrieves the current preset data from the database.
 - **GET `/getMeas`**: Retrieves measurement data from the database based on specified query parameters.
