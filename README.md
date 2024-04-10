@@ -96,17 +96,11 @@ manualOverrideSchema = {
 
 Photos are stored in an output directory /uploads with a timestamp.
 
-### Photo Controller
+### Photo Uploads
 
-- **POST `/setPhoto`**: Sets the photo capture override. To manually trigger a photo capture, send a POST request to `/setPhoto` with the following JSON payload:
+- **POST `/setPhoto`**: Uploads a photo in  jpg binary encoded frame buffer.
 
-  ```json
-  {
-    "photoOverride": 1
-  }
-  ```
-
-  Setting `photoOverride` to 1 will trigger a photo capture every measurement cycle, while setting it to 0 will set it an upload at a predefined interval.
+  The photos are timestamped and stored locally in ./uploads.
 
 ### Preset Model
 
